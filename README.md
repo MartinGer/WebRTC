@@ -56,6 +56,7 @@ WebRTC supports most of the common used browsers but still has a few issues on a
 The website <http://iswebrtcreadyyet.com/legacy.html> should give an overview which and to what point each
 browser is supported, but seems to be a bit outdated most of the time:
 
+![alt text](readme_images/webRtcSupport.jpg?raw=true "WebRTC Browser Support")
 E.g. also Safari can be used to some extend as well at the moment.
 
 Furthermore WebRTC offers possibilities to be used on your Android and iOS mobile devices too. So in theory there
@@ -68,6 +69,8 @@ apparently still implemented under a bit different names in the various browsers
 currently implemented by Chrome and Opera as webkitGetUserMedia and by Firefox as mozGetUserMedia. The
 same applies for the other APIs as well. Those prefixes are going to be removed, as soon as the standards process
 has stabilized. You can find more information in this [table](https://webrtc.org/web-apis/interop/):
+
+![alt text](readme_images/webRTCApiDifferences.jpg?raw=true "webRTCApiDifferences")
 
 To help out, Google and the [WebRTC community](https://github.com/webrtc/adapter/graphs/contributors) developed and maintain a JavaScript shim called [adapter.js](https://github.com/webrtc/adapter),
 that abstracts away those browser differences and spec changes. Have a look on it's GitHub repository to find
@@ -361,15 +364,21 @@ Even though *WebRTCs RTCPeerConnection* attempts to stream the actual media data
 
 So at first *SDP* messages are exchanged between the peers via a Signaling Server of your choice, that receives and sends messages to all the peers who want to connect to one another. Only after that, the media data can be streamed directly *peer to peer*:
 
+![alt text](readme_images/webRTCtopology.jpg?raw=true "WebRTC Topology")
+
 In reality, devices on the internet are most often hidden behind one or more layers of Network Address Translators ([NAT](https://developer.mozilla.org/en-US/docs/Glossary/NAT)). NAT works by dynamically translating private addresses into public ones, when an outbound request passes through them. Similarly, inbound requests to a public IP address are converted back into a private IP to ensure correct routing on the internal network. Consequently, sharing a private IP is often not enough information to establish a connection between two clients.
 
 Furthermore, there might be Firewalls or other Anti-Virus software that block certain ports and protocols. Those are reasons that make it difficult to negotiate, how two peers should communicate directly peer to peer. Because of that, the [ICE](http://en.wikipedia.org/wiki/Interactive_Connectivity_Establishment) (*Interactive Connectivity Establishment*) framework is used by *WebRTC* to overcome the difficulties
 posed by communicating via NAT and find the correct network interfaces and ports to establish a connection. ICE first tries to make a connection using the host address obtained from a device's operating system and network card; if that fails (which it inevitably will for devices behind NATs), ICE then tries to figure out a way around those NATs by obtaining an external address. To do this, each client communicates with special [Session Traversal Utilities for NAT (STUN)](https://en.wikipedia.org/wiki/STUN) servers via the ICE protocol. Those STUN servers are available online and have the one task to check the IP:port address of an incoming request (from an application running behind a NAT) and send that address back as a response. By that the peer discovers its own IP:port from a __public perspective__. Now it can pass that public address on to another peer via the chosen signaling mechanism, in order to set up a direct link. Most
 often this way will work out.
 
+![alt text](readme_images/stun.jpg?raw=true "Stun")
+
 If it fails, the ICE protocol will dictate you to a chosen [Traversal Using Relays around NAT (TURN)](https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT) server, which
 relays the whole audio/video/data communication over that server. Obviously those need to handle a lot of data. By relaying traffic between peers the *WebRTC* communication can be ensured, but can suffer degradations in
 media quality and latency.
+
+![alt text](readme_images/turn.jpg?raw=true "Turn")
 
 Each client will produce multiple ICE candidates to be used to stream media to another client. Each of those
 candidates is a potential address/port to receive media, whereby we differentiate between three types of candidates:
@@ -649,6 +658,8 @@ There are in general three different ways to set up a WebRTC Multi-Party Chat
 
 1. [Mesh](https://webrtcglossary.com/mesh/) – where each participant sends his media to all other participants
 
+![alt text](readme_images/mesh.jpg?raw=true "Mesh")
+
 The Mesh Topology is the easiest way to upgrade the previous one-to-one video chat to support more users. The advantage is that we don't need any central entity in between. Big scaling is a problem though, because each client
 has to set up a peer to peer connection directly to every other client, resulting in each client managing (n-1) bidirectional connections, where n is the total number of clients. The total number of edges/connections is
 exponential, equal to n(n-1)/2, which starts out small, but adds up very fast.
@@ -668,8 +679,11 @@ To solve that problem every client in the chat waits five seconds longer than th
 
 2. [MCU](http://webrtcglossary.com/mcu) – where a participant is “speaking” to a central entity who mixes all inputs and sends out a single stream towards each participant
 
+![alt text](readme_images/mcu.jpg?raw=true "MCU")
+
 3. [SFU](http://webrtcglossary.com/sfu) – where a participant sends his media to a central entity, who routes all incoming media as he sees fit to participants – each one of them receiving usually more than a single stream
 
+![alt text](readme_images/sfu.jpg?raw=true "SFU")
 
 ## 9. WebRTC and Firebase
 Let's have a look on an other way to organize the initial *Signaling* by using *Firebase*. *Firebase* is a mobile and web
