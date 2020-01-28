@@ -1,1 +1,0 @@
-Firebase WebRTC example code
