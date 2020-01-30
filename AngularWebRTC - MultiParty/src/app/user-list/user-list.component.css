@@ -1,0 +1,26 @@
+#videoContainer {
+    display: inline-block;
+    border-style: solid;
+    border-radius: 25px;
+    padding: 0px 20px 20px 20px;
+    position: fixed;
+    resize: both;
+    overflow: auto;
+    width: 15vw;
+    height: auto;
+    left: 41vw;
+    bottom: 21vw;
+    background-color:	#0B4974;
+}
+
+.ng-draggable {
+    cursor: move;
+}
+
+mwlResizable {
+    box-sizing: border-box;
+}
+
+.drag-block-handle{
+    background-color: #938E8C;
+}

@@ -1,0 +1,17 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div id="buttonBar" #buttonBar>
+    <button #muteMicrophoneButton (click)="muteMicrophone()" class="menuBtn"><i class="material-icons" id="muteMic">mic_off</i></button>
+    <button #hideVideoButton (click)="hideVideo()" class="menuBtn"><i class="material-icons" id="hideVideo">videocam_off</i></button>
+    <button #shareScreenButton (click)="shareScreen()" class="menuBtn"><i class="material-icons" id="shareScreen">airplay</i></button>
+</div>
+
+<div id="videos" #videos>
+  <div class = "videoElement">
+    <video #localVideo autoplay muted class='video'></video>
+    <!--  <button id="btn" type = "button">Button</button>  -->
+  </div>
+</div>
+
+<button #callButton (click)="call()" type="button"> Call </button>
+<button #endCallButton (click)="endCall()" type="button" disabled="disabled"> End Call </button>

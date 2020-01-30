@@ -1,0 +1,20 @@
+
+
+<h2>
+  user-list:
+</h2>
+<ul>
+  <li *ngFor="let user of users | async">
+    {{user.id + " : " + user.calling}}
+  </li>
+</ul>
+
+<button #startVideoButton (click)="startVideoChat()" type="button" class="btn btn-primary btn-lg"> start Videochat </button>
+
+<div  mwlResizable
+[enableGhostResize]="true"
+[resizeEdges]="{bottom: true, right: true, top: true, left: true}" ngDraggable position [handle]="myHandle" id='videoContainer' *ngIf="videoVisible">
+  <div #myHandle class="drag-block-handle"> Videos </div>
+  <app-streaming [myKey]="userKey"></app-streaming>
+</div>
+

@@ -1,0 +1,49 @@
+.btn {
+    display: inline-block;
+    left: 38%;
+    bottom: 20%;
+    padding: 5px 5px;
+    width: 55px;
+    height: 35px;
+}
+
+:host ::ng-deep .video {    
+    width: 100%;
+    height: auto;
+    display: flex;
+}
+
+#videos {
+    display: flex; 
+    flex-direction: row;
+    background-color: #938E8C; 
+    width: 100%;
+    height: auto;
+}
+
+/* #videoContainer {
+    max-width: 100%;
+    height: auto;
+    display: flex;
+}
+*/
+
+.videoElement {
+    background-color: #938E8C; 
+    display: flex; 
+    flex-direction: column;
+}
+
+.buttonBar {
+    display: inline-block;
+}
+
+.menuBtn {
+    padding: 5px;
+    font-size: 15px;
+    text-align: center;
+    display: inline-block;
+    margin: 5px 5px;
+    border-radius: 12px;
+    font-size: 10px;
+}
